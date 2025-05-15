@@ -111,9 +111,9 @@ function App() {
             </select>
           </div>
 
-          <div className="flex items-center gap-2 bg-white rounded-md border p-2">
+          <div className="flex items-center gap-2 bg-white rounded-md border p-2 flex-wrap">
             <FaCalendarAlt className="h-5 w-5 text-gray-400" />
-            <div className="flex gap-2">
+            <div className="flex gap-2 flex-wrap">
               <DatePicker
                 selected={startDate}
                 onChange={(date) => setStartDate(date || new Date())}
