@@ -67,11 +67,11 @@ The dashboard integrates with two main APIs:
 ```
 src/
 ├── components/
-│   ├── LineChart.tsx    # Historical data visualization
-│   ├── PieChart.tsx     # Population comparison chart
-│   └── StatCard.tsx     # Statistics display component
-├── App.tsx              # Main application component
-├── main.tsx            # Application entry point
+│   ├── LineChart.jsx    # Historical data visualization
+│   ├── PieChart.jsx     # Population comparison chart
+│   └── StatCard.jsx     # Statistics display component
+├── App.jsx              # Main application component
+├── main.jsx            # Application entry point
 └── index.css           # Global styles and Tailwind imports
 ```
 
