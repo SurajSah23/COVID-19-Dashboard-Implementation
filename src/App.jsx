@@ -6,7 +6,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import StatCard from './components/StatCard';
 import LineChart from './components/LineChart';
 import PieChart from './components/PieChart';
-import { format } from 'date-fns';
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -50,10 +49,8 @@ function App() {
 
   const getLatestStats = () => {
     if (!covidData) return { cases: 0, deaths: 0, recovered: 0 };
-
     const timeline = covidData.timeline;
     const latestDate = Object.keys(timeline.cases).pop() || '';
-
     return {
       cases: timeline.cases[latestDate] || 0,
       deaths: timeline.deaths[latestDate] || 0,
@@ -63,7 +60,6 @@ function App() {
 
   const prepareChartData = () => {
     if (!covidData) return [];
-
     const { cases, deaths, recovered } = covidData.timeline;
     return Object.keys(cases).map(date => ({
       date,
@@ -82,13 +78,15 @@ function App() {
   const population = selectedCountryData?.population || 0;
 
   return (
-    <div className="min-h-screen bg-blue-50 p-6">
+    <div className="min-h-screen bg-blue-60 p-4 sm:p-6">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-2xl font-semibold text-gray-800 mb-6">COVID-19 and Population Dashboard</h1>
+        <h1 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-6 text-center sm:text-left">
+          COVID-19 and Population Dashboard
+        </h1>
 
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-          <div className="w-full md:w-auto flex flex-col md:flex-row gap-4">
-            <div className="relative flex-grow md:w-64">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 gap-4">
+          <div className="w-full lg:w-auto flex flex-col sm:flex-row gap-4 flex-grow">
+            <div className="relative w-full sm:w-64">
               <input
                 type="text"
                 placeholder="Search Country"
@@ -99,7 +97,7 @@ function App() {
               <FaSearch className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
             </div>
             <select
-              className="p-2 border rounded-md w-full md:w-auto bg-white"
+              className="p-2 border rounded-md bg-white w-full sm:w-auto"
               value={selectedCountry}
               onChange={(e) => setSelectedCountry(e.target.value)}
             >
@@ -120,7 +118,7 @@ function App() {
                 selectsStart
                 startDate={startDate}
                 endDate={endDate}
-                className="border-0 focus:ring-0"
+                className="border-0 focus:ring-0 text-sm"
                 dateFormat="dd-MM-yyyy"
               />
               <span>-</span>
@@ -131,7 +129,7 @@ function App() {
                 startDate={startDate}
                 endDate={endDate}
                 minDate={startDate}
-                className="border-0 focus:ring-0"
+                className="border-0 focus:ring-0 text-sm"
                 dateFormat="dd-MM-yyyy"
               />
             </div>
@@ -145,10 +143,10 @@ function App() {
         )}
 
         {loading ? (
-          <div className="text-center py-8">Loading...</div>
+          <div className="text-center py-8">Loading....</div>
         ) : (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
               <StatCard
                 title="Total Cases"
                 value={stats.cases}
@@ -175,12 +173,12 @@ function App() {
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-white p-6 rounded-lg shadow">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="bg-white p-6 rounded-lg shadow overflow-x-auto">
                 <h2 className="text-lg font-semibold mb-4">Line Chart</h2>
                 <LineChart data={prepareChartData()} />
               </div>
-              <div className="bg-white p-6 rounded-lg shadow">
+              <div className="bg-white p-6 rounded-lg shadow overflow-x-auto">
                 <h2 className="text-lg font-semibold mb-4">Pie Chart</h2>
                 <PieChart
                   data={[
